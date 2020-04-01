@@ -27,6 +27,8 @@ namespace BookListRazor
 		{
 			services.AddDbContext<DataContext>(option =>
 				option.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+			services.AddControllersWithViews();
 			
 			services.AddRazorPages()
 					.AddRazorRuntimeCompilation();
@@ -53,7 +55,11 @@ namespace BookListRazor
 
 			app.UseAuthorization();
 
-			app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllers();
+				endpoints.MapRazorPages();
+			});
 		}
 	}
 }
